@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
+import './App.css'
+import './App.module.scss';
+import Button from './components/Button';
+import { ButtonType } from './components/Button/Button';
+import UserName from "./components/UserName";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Tabs from "./components/Tabs";
+// import { CloseIcon, OpenedMenu } from "./assets/icons";
+
+
+
+const App = () => {
+    return (
+        <div className='App'>
+            <Button title={'Primary'} type={ButtonType.Primary} onClick={() =>{}} />
+            <Button title={'Secondary'} type={ButtonType.Secondary} onClick={() => {}} />
+            <Button title={'Error'} type={ButtonType.Error} onClick={() => { }} />
+            <UserName username={"Artem Malkin"} />
+            <Tabs />  
+        </div>
+        
+    )
 }
 
 export default App;
