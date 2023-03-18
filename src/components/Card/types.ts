@@ -1,5 +1,3 @@
-// import { Card } from './types';
-
 export type Card = {
     "id": number,
     "image": string,
@@ -12,9 +10,9 @@ export type Card = {
   }
 
 export enum CardSize {
-    Large = 0,
-    Medium = 1,
-    Small = 2,
+    Large,
+    Medium,
+    Small,
 }
   
 export type CardProps = {
