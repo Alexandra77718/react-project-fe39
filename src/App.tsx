@@ -50,6 +50,7 @@ const App = () => {
             <Input value={text} onChange={onChangeText} title="Title" placeholder="Placeholder" errorText ={"Error text"} />
             <Input value={text} onChange={onChangeText} title="Title" placeholder="Placeholder" disabled ={true} /> 
             <Card card={MOCK_CARD} size={CardSize.Large} />
+            <Home />
             
         </div>
         
