@@ -13,6 +13,7 @@ import { title } from "process";
 import { Value } from "sass";
 import Card from './components/Card';
 import { CardSize } from "./components/Card/types";
+import Home from './pages/Home';
 
 const MOCK_CARD = {
     "id": 0,

@@ -1,4 +1,3 @@
-// import { tab } from "@testing-library/user-event/dist/tab";
 import React, {useState} from "react";
 
 import styles from './Tabs.module.scss';

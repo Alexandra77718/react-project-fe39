@@ -1,4 +1,4 @@
-export type Card = {
+export type CardType = {
     "id": number,
     "image": string,
     "text": string,
@@ -7,15 +7,15 @@ export type Card = {
     "title": string,
     "description": string,
     "author": number,
-  }
+};
 
 export enum CardSize {
     Large,
     Medium,
     Small,
-}
+};
   
 export type CardProps = {
-    card: Card,
+    card: CardType,
     size: CardSize,
 }
