@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Card from '../Card';
 import { CardSize, CardType } from '../Card/types';
-import styles from './CardList.module.scss';
+import styles from './CardsList.module.scss';
 
 // export type MOCK_ARRAY_Type = {
 //     id: number;
@@ -137,16 +137,16 @@ export const MOCK_ARRAY = [
     },
 ]
 
-type CardListProps = {
-    cardList: CardType[];
+type CardsListProps = {
+    cardsList: CardType[];
 };
-const CardsList: FC<CardListProps> = ({ cardList }) => {
-    return cardList.length > 0 ? (
+const CardsList: FC<CardsListProps> = ({ cardsList }) => {
+    return cardsList.length > 0 ? (
         <div className={styles.container}>
             <div>
-                <Card card={cardList[0]} size={CardSize.Large} />
+                <Card card={cardsList[0]} size={CardSize.Large} />
                 <div className={styles.mediumContainer}>
-                    {cardList.map((item, index) => {
+                    {cardsList.map((item, index) => {
                         if (index > 0 && index < 5) {
                             return <Card key={item.id} card={item} size={CardSize.Medium} />;
                         }
@@ -155,7 +155,7 @@ const CardsList: FC<CardListProps> = ({ cardList }) => {
                 </div>
             </div>
             <div className={styles.rightSideContainer}>
-                {cardList.map((item, index) => {
+                {cardsList.map((item, index) => {
                     if (index > 5) {
                         return <Card key={item.id} card={item} size={CardSize.Small} />;
                     }
