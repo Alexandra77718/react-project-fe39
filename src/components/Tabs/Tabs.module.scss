@@ -17,11 +17,9 @@
     }
 
 }
-
 .activeTab {
     border-bottom: 2px solid $secondary;
 }
-
 .disabled {
     color: $gray;
     &:hover {
@@ -29,3 +27,12 @@
         color: $gray;
     }
 }
+.darkContainer{
+    border-bottom-color: $gray;
+    .tab{
+      color: $white;
+    }
+    .activeTab{
+      border-bottom-color: $white;
+    }
+  }

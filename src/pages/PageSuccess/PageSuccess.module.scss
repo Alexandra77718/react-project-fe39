@@ -1,0 +1,73 @@
+@import "./src/assets/colors";
+
+.container {
+  background-color: $light;
+}
+.containerDark{
+  background-color: $secondary;
+}
+.backToHome {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $secondary;
+  margin-bottom: 32px;
+}
+.backToHomeDark{
+  color: $white;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.emailText {
+  border: 1px solid $medium;
+  padding: 40px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: $secondary;
+}
+.emailTextDark{
+  border-color: $gray;
+  color: $white;
+}
+.title {
+  text-align: start;
+  margin-bottom: 72px;
+}
+.forgotPassword {
+  font-size: 16px;
+  line-height: 20px;
+  color: $secondary;
+  font-weight: 400;
+}
+.darkThemeForgotPassword{
+  color: $white;
+}
+.button {
+  text-align: center;
+  margin-top: 48px;
+  width: 544px;
+}
+.signUp {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  color: $gray;
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+  & span {
+    color: $primary;
+  }
+}
+.darkSignUp{
+  color:$medium;
+  & span {
+    color: $primary-secondary;
+  }
+}
