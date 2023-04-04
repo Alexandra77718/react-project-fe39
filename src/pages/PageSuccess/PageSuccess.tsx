@@ -30,7 +30,7 @@ const Success = () => {
                     <div>E-mail confirmed.</div>
                     Your registration is now completed
                     <div className={styles.button}>
-                        <Button title={'Sign In'}
+                        <Button title={'Go to home'}
                             onClick={() => { }}
                             type={ButtonType.Primary} />
                     </div>
