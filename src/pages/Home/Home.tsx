@@ -3,9 +3,8 @@ import Title from '../../components/Title';
 import Tabs from "../../components/Tabs";
 import CardsList from '../../components/CardsList';
 import { CardType } from '../../components/Card/types';
-import styles from './Home.module.scss';
 import { TabsNames } from '../../components/Tabs/type';
-import PostPage from '../PostPage';
+import PostPage from '../PagePost';
 import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
@@ -209,18 +208,13 @@ const Home = () => {
     }, [MOCK_ARRAY]);
 
     return (
-        <div className={classNames(styles.container, {
-            [styles.darkContainer]: theme === Theme.Dark,
-        })}>
+        <div>
             <Title title={"Blog"} />
             <Tabs tabsList={TABS_LIST}
                 activeTab={activeTab}
                 onClick={onTabClick} />
             <CardsList cardsList={cardsList} />
             <PostPage page={MOCK_PAGE} />
-            <ThemeSwitcher />
-            <SingIn />
-            <Success />
         </div>
     );
 };

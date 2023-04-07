@@ -1,2 +1,2 @@
-export { default } from './PostPage';
+export { default } from './PagePost';
 export type { PageType } from './types';

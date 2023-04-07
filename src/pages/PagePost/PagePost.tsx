@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './PostPage.module.scss';
+import styles from './PagePost.module.scss';
 import { LikeIcon, DislikeIcon, BookmarkIcon, MoreIcon } from '../../assets/icons';
 import { PostPageProps } from './types';
 import classNames from "classnames";
