@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PageSuccess.module.scss";
+import styles from "./Success.module.scss";
 import Title from "../../components/Title";
 import classNames from "classnames";
 import Button from "../../components/Button";

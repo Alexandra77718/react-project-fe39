@@ -1,25 +1,24 @@
-import React, { useState} from "react";
-import ThemeProvider from './context/Theme/Provider';
-import {Theme} from "./context/Theme/Context";
-import Router  from './pages/Router';
-import classNames from "classnames";
-import styles from './App.module.scss';
-
+import React, { useState } from "react";
+import ThemeProvider from "./context/Theme/Provider";
+import { Theme } from "./context/Theme/Context";
+import Router from "./pages/Router";
+import store from "./redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { changeTheme, ThemeSelectors } from "./redux/reducers/themeSlice";
 
 const App = () => {
-    const [theme, setTheme] = useState(Theme.Dark)
+  const dispatch = useDispatch();
+  const theme = useSelector(ThemeSelectors.getThemeValue);
 
-    const onChangeTheme = (value: Theme) => {
-        setTheme(value)
-    }
+  const onChangeTheme = (value: Theme) => {
+    dispatch(changeTheme(value));
+  };
 
-    return (
-        <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
-            <div className={styles.container}>
-           <Router />
-            </div>
-        </ThemeProvider>
-    );
-}
+  return (
+    <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
+      <Router />
+    </ThemeProvider>
+  );
+};
 
 export default App;

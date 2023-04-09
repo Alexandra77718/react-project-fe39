@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./PageConfirm.module.scss";
+import styles from "./Confirm.module.scss";
 import Title from "../../components/Title";
 import classNames from "classnames";
 import Button from "../../components/Button";

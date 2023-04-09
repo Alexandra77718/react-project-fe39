@@ -1,13 +1,12 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PagesContainer from "./PagesContainer";
 import Home from "./Home";
-import SignIn from "./PageSignIn";
-import Success from "./PageSuccess";
-import PostPage from "./PagePost";
-import SignUp from "./PageSignUp";
-import Confirm from "./PageConfirm";
-
+import SignIn from "./SignIn";
+import Success from "./Success";
+import PostPage from "./Post";
+import SignUp from "./SignUp";
+import Confirm from "./Confirm";
 
 export enum RoutesList {
   Home = "/",
@@ -17,9 +16,11 @@ export enum RoutesList {
   SignIn = "/sign-in",
   SignUp = "/sign-up",
   Confirm = "/sign-up/confirm",
-  Success = "/sign-up/success",
+    Success = "/sign-up/success",
+  Default = '*',
 }
 const Router = () => {
+  const isLoggedIn = false;
   return (
     <BrowserRouter>
       <Routes>
@@ -30,6 +31,13 @@ const Router = () => {
           <Route path={RoutesList.Success} element={<Success />} />
           <Route path={RoutesList.SignUp} element={<SignUp />} />
           <Route path={RoutesList.Confirm} element={<Confirm />} />
+          <Route
+            path={RoutesList.AddPost}
+            element={
+              isLoggedIn ? <Home /> : <Navigate to={RoutesList.SignIn} />
+            }
+          />
+          <Route path={RoutesList.Default} element={<div>404 NOT FOUND</div>} />
         </Route>
       </Routes>
     </BrowserRouter>

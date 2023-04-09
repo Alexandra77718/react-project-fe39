@@ -4,12 +4,13 @@ import Tabs from "../../components/Tabs";
 import CardsList from '../../components/CardsList';
 import { CardType } from '../../components/Card/types';
 import { TabsNames } from '../../components/Tabs/type';
-import PostPage from '../PagePost';
+import PostPage from '../Post';
 import classNames from "classnames";
 import {Theme, useThemeContext} from "../../context/Theme/Context";
 import ThemeSwitcher from "../../components/ThemeSwitcher";
-import SingIn from "../PageSignIn";
-import Success from "../PageSuccess";
+import SingIn from "../SignIn";
+import Success from "../Success";
+import Confirm from "../Confirm";
 
 const TABS_LIST = [
     {
