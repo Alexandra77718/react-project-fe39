@@ -8,3 +8,5 @@ export { MoonIcon } from './MoonIcon';
 export { SunIcon } from './SunIcon';
 export { UserIcon } from './UserIcon';
 export { ClosePostIcon } from './ClosePostIcon';
+export { CloseIconModal } from "./CloseIconModal";
+export {SavedBookmarkIcon} from './SavedBookmarkIcon'

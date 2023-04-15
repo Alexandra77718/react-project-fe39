@@ -55,7 +55,6 @@ const Header = () => {
           type={ButtonType.Primary}
           className={styles.button}
         />
-        <UserName username={"Artem Malkin"} />
         {isLoggedIn ? (
           <UserName username={"Artem Malkin"} />
         ) : (
@@ -70,7 +69,6 @@ const Header = () => {
       {isOpened && (
         <div className={styles.menuContainer}>
           <div className={styles.actionsContainer}>
-            <UserName username={"Artem Malkin"} />
             {isLoggedIn && <UserName username={"Artem Malkin"} />}
             {navButtonsList.map(({ key, title }) => {
               return (
