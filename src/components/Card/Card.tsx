@@ -1,7 +1,8 @@
 import React, { FC, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import styles from "./Card.module.scss";
-import { CardProps, CardSize } from "./types";
+import { CardProps } from "./types";
 import {
   LikeIcon,
   DislikeIcon,
@@ -19,11 +20,13 @@ import {
   setSelectedPost,
   setStatus,
 } from "../../redux/reducers/postSlice";
+import { CardSize } from "../../utils/@globalTypes";
 
 const Card: FC<CardProps> = ({ card, size }) => {
-  const { title, text, date, image } = card;
+  const { title, text, date, image, id } = card;
   const { theme } = useThemeContext();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const isVisible = useSelector(PostSelectors.getVisibleSelectedModal);
 
   const isMedium = size === CardSize.Medium;
@@ -48,6 +51,10 @@ const Card: FC<CardProps> = ({ card, size }) => {
     dispatch(setSavedPosts({ card }));
   };
 
+  const onTitleClick = () => {
+    navigate(`/blog/${id}`);
+  };
+
   return (
     <div
       className={classNames(styles.container, {
@@ -69,7 +76,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
               className={classNames(styles.title, {
                 [styles.mediumTitle]: isMedium || isSmall,
                 [styles.darkTitle]: isDark,
-              })}
+              })} onClick={onTitleClick}
             >
               {title}
             </div>
@@ -117,7 +124,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
             <div onClick={onClickMore}>
               <MoreIcon />
             </div>
-         )}  
+          )}
         </div>
       </div>
     </div>

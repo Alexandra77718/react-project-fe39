@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
-import Card, { CardType } from "../Card";
-import { CardSize } from "../Card/types";
+import Card from '../Card/Card';
+import { CardType } from "../../utils/@globalTypes";
+import { CardSize } from "../../utils/@globalTypes";
 import styles from "./PostModalWindow.module.scss";
 import { usePostVisibilityContext } from "../../context/PostVisibility/Context";
 import { ClosePostIcon } from "../../assets/icons";

@@ -19,8 +19,10 @@ export enum RoutesList {
     Success = "/sign-up/success",
   Default = '*',
 }
+
 const Router = () => {
-  const isLoggedIn = false;
+    const isLoggedIn = false;
+    
   return (
     <BrowserRouter>
       <Routes>

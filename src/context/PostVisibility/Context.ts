@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { CardType } from "../../components/Card";
+import { CardType } from "../../utils/@globalTypes";
 
 const initialState = {
   postVisibility: false,

@@ -2,7 +2,7 @@ import React, {useState, FC } from 'react';
 import styles from './BurgerButton.module.scss';
 import { CloseIcon, OpenedMenu } from "../../assets/icons";
 import Button from '../Button';
-import { ButtonType } from '../Button/Button';
+import {ButtonType} from "../../utils/@globalTypes";
 
 type BurgerButtonProps = {
     isOpened: boolean;
