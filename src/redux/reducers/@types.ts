@@ -3,17 +3,25 @@ export type UserPayloadData = {
     email: string;
     password: string;
 };
+
+export type PayloadWithCallback<Data> = {
+    data: Data;
+    callback: () => void;
+};
+
+
 export type ActivateUserData = {
     uid: string;
     token: string;
+};
+
+export type SignInUserData = {
+    email: string;
+    password: string;
 };
 
 
 export type SignUpUserPayload = PayloadWithCallback<UserPayloadData>
 export type ActivateUserPayload = PayloadWithCallback<ActivateUserData>
 
-
-export type PayloadWithCallback<Data> = {
-    data: Data;
-    callback: () => void;
-};
+export type SignInUserPayload = PayloadWithCallback<SignInUserData>;

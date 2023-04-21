@@ -9,20 +9,19 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
 import { UserIcon } from "../../../assets/icons";
 import { ButtonType } from "../../../utils/@globalTypes";
+import { useDispatch, useSelector } from "react-redux";
+import { AuthSelectors, logoutUser } from "../../../redux/reducers/authSlice";
 
 const Header = () => {
   const [isOpened, setOpened] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isLoggedIn = true;
 
-  const onButtonClick = () => {
-    setOpened(!isOpened);
-  };
-  const onAuthButtonClick = () => {
-    navigate(RoutesList.SignIn);
-  };
+  const dispatch = useDispatch();
+
+  const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
+  const userInfo = useSelector(AuthSelectors.getUserInfo);
 
   const navButtonsList = useMemo(
     () => [
@@ -42,14 +41,28 @@ const Header = () => {
     [isLoggedIn]
   );
 
+  const onButtonClick = () => {
+    return setOpened(!isOpened);
+  };
+  const onAuthButtonClick = () => {
+    navigate(RoutesList.SignIn);
+  };
+  const onLogoutClick = () => {
+    dispatch(logoutUser());
+  };
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.btnBurger}>
           <BurgerButton isOpened={isOpened} onClick={onButtonClick} />
         </div>
-        <div className={styles.userName}>
-          {isLoggedIn ? <UserName username={"Artem Malkin"} /> : <UserIcon />}
+        <div className={styles.userName} onClick={onAuthButtonClick}>
+          {isLoggedIn && userInfo ? (
+            <UserName username={userInfo?.username} />
+          ) : (
+            <UserIcon />
+          )}
         </div>
       </div>
       {isOpened && (
@@ -57,7 +70,7 @@ const Header = () => {
           <div className={styles.actionsContainer}>
             {isLoggedIn && (
               <div className={styles.userNameMenu}>
-                <UserName username={"Artem Malkin"} />
+                {userInfo ? <UserName username={userInfo?.username} /> : null}
               </div>
             )}
             <div>
@@ -80,7 +93,7 @@ const Header = () => {
             <ThemeSwitcher />
             <Button
               title={isLoggedIn ? "Log out" : "Sign In"}
-              onClick={onAuthButtonClick}
+              onClick={isLoggedIn ? onLogoutClick : onAuthButtonClick}
               type={ButtonType.Secondary}
               className={styles.authButton}
             />

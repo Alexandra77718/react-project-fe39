@@ -1,13 +1,14 @@
 import React, { FC, ReactNode } from "react";
-import classNames from "classnames";
-
 import styles from './UserName.module.scss';
+import BurgerButton from "../BurgerButton/BurgerButton";
+import {UserInfoResponse} from "../../redux/sagas/@types";
 
 type UserNameProps = {
-    username: string;
+    username: string,
+    className?: string,
 };
 
-const UserName: FC<UserNameProps> = ({ username }) => {
+const UserName: FC<UserNameProps> = ({ username, className }) => {
     const userLogo: string = username.split(' ').map(elem => elem[0].toUpperCase()).join('')
 
     return (
