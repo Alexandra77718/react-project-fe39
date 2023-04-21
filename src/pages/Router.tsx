@@ -2,11 +2,13 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import PagesContainer from "./PagesContainer";
 import Home from "./Home";
-import SignIn from "./SignIn";
-import Success from "./Success";
+import SignIn from "./FormPages/SignIn";
+import Success from "./FormPages/Success";
 import PostPage from "./Post";
-import SignUp from "./SignUp";
-import Confirm from "./Confirm";
+import SignUp from "./FormPages/SignUp";
+import Confirm from "./FormPages/Confirm";
+import ResetPassword from "./FormPages/ResetPassword";
+import NewPassword from "./FormPages/NewPassword";
 
 export enum RoutesList {
   Home = "/",
@@ -15,14 +17,16 @@ export enum RoutesList {
   AddPost = "/blog/add",
   SignIn = "/sign-in",
   SignUp = "/sign-up",
-  Confirm = "/sign-up/confirm",
-    Success = "/sign-up/success",
-  Default = '*',
+  Confirm = "activate/:uid/:token",
+  Success = "/sign-up/success",
+  Default = "*",
+  ResetPassword = "/sign-in/reset-password",
+  NewPassword = "/new-password",
 }
 
 const Router = () => {
-    const isLoggedIn = false;
-    
+  const isLoggedIn = false;
+
   return (
     <BrowserRouter>
       <Routes>
@@ -33,6 +37,8 @@ const Router = () => {
           <Route path={RoutesList.Success} element={<Success />} />
           <Route path={RoutesList.SignUp} element={<SignUp />} />
           <Route path={RoutesList.Confirm} element={<Confirm />} />
+          <Route path={RoutesList.ResetPassword} element={<ResetPassword />} />
+          <Route path={RoutesList.NewPassword} element={<NewPassword />} />
           <Route
             path={RoutesList.AddPost}
             element={

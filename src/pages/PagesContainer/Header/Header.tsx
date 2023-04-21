@@ -7,9 +7,8 @@ import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import Button from "../../../components/Button";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
-import { CloseIcon, OpenedMenu, UserIcon } from "../../../assets/icons";
-import { useDispatch, useSelector } from "react-redux";
-import {ButtonType} from "../../../utils/@globalTypes";
+import { UserIcon } from "../../../assets/icons";
+import { ButtonType } from "../../../utils/@globalTypes";
 
 const Header = () => {
   const [isOpened, setOpened] = useState(false);
@@ -18,29 +17,27 @@ const Header = () => {
   const location = useLocation();
   const isLoggedIn = true;
 
-  const onClickMenuButton = () => {
+  const onButtonClick = () => {
     setOpened(!isOpened);
   };
   const onAuthButtonClick = () => {
     navigate(RoutesList.SignIn);
   };
+
   const navButtonsList = useMemo(
     () => [
       {
         title: "Home",
         key: RoutesList.Home,
       },
-      {
-        title: "Add Post",
-        key: RoutesList.AddPost,
-      },
       ...(!isLoggedIn
-        ? [
+        ? []
+        : [
             {
               title: "Add Post",
               key: RoutesList.AddPost,
             },
-          ]:[]),
+          ]),
     ],
     [isLoggedIn]
   );
@@ -48,46 +45,42 @@ const Header = () => {
   return (
     <>
       <div className={styles.container}>
-        <Button
-          title={isOpened ? <CloseIcon /> : <OpenedMenu />}
-          onClick={onClickMenuButton}
-          type={ButtonType.Primary}
-          className={styles.button}
-        />
-        {isLoggedIn ? (
-          <UserName username={"Artem Malkin"} />
-        ) : (
-          <Button
-            title={<UserIcon />}
-            onClick={onAuthButtonClick}
-            type={ButtonType.Primary}
-            className={styles.button}
-          />
-        )}
+        <div className={styles.btnBurger}>
+          <BurgerButton isOpened={isOpened} onClick={onButtonClick} />
+        </div>
+        <div className={styles.userName}>
+          {isLoggedIn ? <UserName username={"Artem Malkin"} /> : <UserIcon />}
+        </div>
       </div>
       {isOpened && (
         <div className={styles.menuContainer}>
           <div className={styles.actionsContainer}>
-            {isLoggedIn && <UserName username={"Artem Malkin"} />}
-            {navButtonsList.map(({ key, title }) => {
-              return (
-                <NavLink
-                  to={key}
-                  key={key}
-                  className={classNames(styles.navButton, {
-                    [styles.activeNavButton]: location.pathname === key,
-                  })}
-                >
-                  {title}
-                </NavLink>
-              );
-            })}
+            {isLoggedIn && (
+              <div className={styles.userNameMenu}>
+                <UserName username={"Artem Malkin"} />
+              </div>
+            )}
+            <div>
+              {navButtonsList.map(({ key, title }) => {
+                return (
+                  <NavLink
+                    to={key}
+                    key={key}
+                    className={classNames(styles.navButton, {
+                      [styles.activeNavButton]: location.pathname === key,
+                    })}
+                  >
+                    {title}
+                  </NavLink>
+                );
+              })}
+            </div>
           </div>
           <div>
             <ThemeSwitcher />
             <Button
               title={isLoggedIn ? "Log out" : "Sign In"}
-              onClick={isLoggedIn ? () => {} : onAuthButtonClick}
+              onClick={onAuthButtonClick}
               type={ButtonType.Secondary}
               className={styles.authButton}
             />
@@ -97,4 +90,5 @@ const Header = () => {
     </>
   );
 };
+
 export default Header;

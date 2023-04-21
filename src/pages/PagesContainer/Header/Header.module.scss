@@ -9,6 +9,9 @@
   top: 0;
   width: 100%;
 }
+.btnBurger{
+    border-right: 1px solid $primary-secondary;
+  }
 .menuContainer{
   position: absolute;
   top: 84px;
@@ -22,6 +25,12 @@
 }
 .userName{
   margin-right: 32px;
+  border-left: 1px solid $primary-secondary;
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 30px;
 }
 .userNameMenu{
   height: 84px;
