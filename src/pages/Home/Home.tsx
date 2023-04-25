@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Title from "../../components/Title";
+import Title from "src/components/Title";
 import Tabs from "../../components/Tabs";
 import CardsList from "../../components/CardsList";
 import { TabsNames } from "../../components/Tabs/type";

@@ -10,7 +10,9 @@ import Confirm from "./FormPages/Confirm";
 import ResetPassword from "./FormPages/ResetPassword";
 import NewPassword from "./FormPages/NewPassword";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSelectors, userInfo } from "../redux/reducers/authSlice";
+import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
+import {getMyPosts} from "../../src/redux/reducers/postSlice";
+
 
 export enum RoutesList {
   Home = "/",
@@ -32,7 +34,8 @@ const Router = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(userInfo());
+      dispatch(getUserInfo()),
+      dispatch(getMyPosts())
     }
   }, [isLoggedIn]);
 
