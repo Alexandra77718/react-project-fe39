@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import Card from '../Card';
 import styles from './CardsList.module.scss';
-import { CardListType, CardSize } from '../../utils/@globalTypes';
+import { CardListType, CardSize } from 'src/utils/@globalTypes';
+import EmptyState from "src/components/EmptyState";
 
 type CardsListProps = {
     cardsList: CardListType;
@@ -29,11 +30,10 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
                     if (index > 5) {
                         return <Card key={item.id} card={item} size={CardSize.Small} />;
                     }
-                }
-                )}
+                })}
             </div>
         </div>
-    ) : null;      
+    ) : <EmptyState title={"Sorry, there's no posts"} description={"Try to check out another category"}/>;      
 };
 
 export default CardsList;

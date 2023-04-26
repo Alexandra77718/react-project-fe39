@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import styles from "./Card.module.scss";
@@ -9,8 +9,8 @@ import {
   BookmarkIcon,
   MoreIcon,
   SavedBookmarkIcon,
-} from "../../assets/icons";
-import { Theme, useThemeContext } from "../../context/Theme/Context";
+} from "src/assets/icons";
+import { Theme, useThemeContext } from "src/context/Theme/Context";
 import { useDispatch, useSelector } from "react-redux";
 import {
   LikeStatus,
@@ -19,8 +19,9 @@ import {
   setSavedPosts,
   setSelectedPost,
   setStatus,
-} from "../../redux/reducers/postSlice";
-import { CardSize } from "../../utils/@globalTypes";
+} from "src/redux/reducers/postSlice";
+import { CardSize } from "src/utils/@globalTypes";
+import { AuthSelectors } from "src/redux/reducers/authSlice";
 
 const Card: FC<CardProps> = ({ card, size }) => {
   const { title, text, date, image, id } = card;
@@ -33,12 +34,16 @@ const Card: FC<CardProps> = ({ card, size }) => {
   const isSmall = size === CardSize.Small;
   const isDark = theme === Theme.Dark;
 
+  const isSearch = size === CardSize.Search;
+
   const likedPosts = useSelector(PostSelectors.getLikedPosts);
   const dislikedPosts = useSelector(PostSelectors.getDislikedPosts);
   const likedIndex = likedPosts.findIndex((post) => post.id === card.id);
   const dislikedIndex = dislikedPosts.findIndex((post) => post.id === card.id);
   const savedPosts = useSelector(PostSelectors.getSavedPosts);
   const savedPostsIndex = savedPosts.findIndex((post) => post.id === card.id);
+
+  const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
 
   const onClickMore = () => {
     dispatch(setSelectedPost(card));
@@ -61,12 +66,14 @@ const Card: FC<CardProps> = ({ card, size }) => {
         [styles.mediumContainer]: isMedium,
         [styles.smallContainer]: isSmall,
         [styles.darkContainer]: isDark,
+        [styles.searchContainer]: isSearch,
       })}
     >
       <div
         className={classNames(styles.infoContainer, {
           [styles.mediumInfoContainer]: isMedium,
           [styles.smallInfoContainer]: isSmall,
+          [styles.searchInfoContainer]: isSearch,
         })}
       >
         <div className={styles.mainInfoContainer}>
@@ -74,9 +81,10 @@ const Card: FC<CardProps> = ({ card, size }) => {
             <div className={styles.date}>{date}</div>
             <div
               className={classNames(styles.title, {
-                [styles.mediumTitle]: isMedium || isSmall,
+                [styles.mediumTitle]: isMedium || isSmall || isSearch,
                 [styles.darkTitle]: isDark,
-              })} onClick={onTitleClick}
+              })}
+              onClick={onTitleClick}
             >
               {title}
             </div>
@@ -87,7 +95,7 @@ const Card: FC<CardProps> = ({ card, size }) => {
           src={image}
           className={classNames(styles.image, {
             [styles.mediumImage]: isMedium,
-            [styles.smallImage]: isSmall,
+            [styles.smallImage]: isSmall || isSearch,
           })}
         />
       </div>
@@ -117,9 +125,12 @@ const Card: FC<CardProps> = ({ card, size }) => {
             [styles.darkIconContainer]: isDark,
           })}
         >
-          <div onClick={onClickBookmark}>
-            {savedPostsIndex > -1 ? <SavedBookmarkIcon /> : <BookmarkIcon />}
-          </div>
+          {isLoggedIn && (
+            <div onClick={onClickBookmark}>
+              {savedPostsIndex > -1 ? <SavedBookmarkIcon /> : <BookmarkIcon />}
+            </div>
+          )}
+
           {!isVisible && (
             <div onClick={onClickMore}>
               <MoreIcon />

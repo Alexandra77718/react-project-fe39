@@ -1,12 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import { RootState } from "../store";
-import { CardType, CardListType } from "../../utils/@globalTypes";
+import { CardType, CardListType } from "src/utils/@globalTypes";
+import {
+  GetAllPostsPayload,
+  SetAllPostsPayload,
+} from "src/redux/reducers/@types";
 
 export enum LikeStatus {
   Like = "like",
   Dislike = "disLike",
 }
+
 type InitialType = {
   selectedPost: CardType | null;
   isVisibleSelectedModal: boolean;
@@ -15,7 +19,10 @@ type InitialType = {
   savedPosts: CardListType;
   postsList: CardListType;
   singlePost: CardType | null;
-    myPosts: CardListType;
+  myPosts: CardListType;
+  searchedPosts: CardListType;
+  searchValue: string;
+  postsCount: number;
 };
 
 const initialState: InitialType = {
@@ -25,24 +32,31 @@ const initialState: InitialType = {
   dislikedPosts: [],
   savedPosts: [],
   postsList: [],
-    singlePost: null,
-    myPosts: [],
+  singlePost: null,
+  myPosts: [],
+  searchedPosts: [],
+  searchValue: "",
+  postsCount: 0,
 };
 
 const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    getAllPosts: (state, action: PayloadAction<undefined>) => {},
-    setAllPosts: (state, action: PayloadAction<CardListType>) => {
-      state.postsList = action.payload;
+    getAllPosts: (_, __: PayloadAction<GetAllPostsPayload>) => {},
+    setAllPosts: (
+      state,
+      { payload: { postsCount, cardList } }: PayloadAction<SetAllPostsPayload>
+    ) => {
+      state.postsList = cardList;
+      state.postsCount = postsCount;
     },
     getSinglePost: (state, action: PayloadAction<string>) => {},
     setSinglePost: (state, action: PayloadAction<CardType | null>) => {
       state.singlePost = action.payload;
     },
 
-    getMyPosts: (state , action:PayloadAction<undefined>)=>{},
+    getMyPosts: (state, action: PayloadAction<undefined>) => {},
     setMyPosts: (state, action: PayloadAction<CardListType>) => {
       state.myPosts = action.payload;
     },
@@ -91,6 +105,12 @@ const postSlice = createSlice({
         state.savedPosts.splice(savedPostsIndex, 1);
       }
     },
+    getSearchedPosts: (state, action: PayloadAction<string>) => {
+      state.searchValue = action.payload;
+    },
+    setSearchedPosts: (state, action: PayloadAction<CardListType>) => {
+      state.searchedPosts = action.payload;
+    },
   },
 });
 
@@ -102,8 +122,11 @@ export const {
   getAllPosts,
   setAllPosts,
   getSinglePost,
-    setSinglePost,
-    setMyPosts,getMyPosts
+  setSinglePost,
+  setMyPosts,
+  getMyPosts,
+  getSearchedPosts,
+  setSearchedPosts,
 } = postSlice.actions;
 
 export default postSlice.reducer;
@@ -116,6 +139,9 @@ export const PostSelectors = {
   getDislikedPosts: (state: RootState) => state.posts.dislikedPosts,
   getSavedPosts: (state: RootState) => state.posts.savedPosts,
   getAllPosts: (state: RootState) => state.posts.postsList,
-    getSinglePost: (state: RootState) => state.posts.singlePost,
-    getMyPosts: (state:RootState)=>state.posts.myPosts,
+  getSinglePost: (state: RootState) => state.posts.singlePost,
+  getMyPosts: (state: RootState) => state.posts.myPosts,
+  getSearchedPosts: (state: RootState) => state.posts.searchedPosts,
+  getSearchValue: (state: RootState) => state.posts.searchValue,
+  getAllPostsCount: (state: RootState) => state.posts.postsCount,
 };

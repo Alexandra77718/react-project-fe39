@@ -1,37 +1,41 @@
-@import 'src/assets/colors';
-.container{
-    margin-bottom: 20px;
-}
+@import "src/assets/colors";
+
 .title {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 20px;
-    color: $secondary;
-    margin-bottom: 8px;
-    padding: 18px 20px;
-    box-sizing: border-box;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+  color: $secondary;
+  margin-bottom: 8px;
+  padding: 18px 20px;
+  box-sizing: border-box;
 }
-.darkTitle{
-    color:$white;
+.darkTitle {
+  color: $white;
 }
 .input {
-    width: 544px;
-    height: 56px;
-    border: none;
-    &:focus {
-        outline: none;
-        border: 2px solid $medium;
-    }
+  width: 544px;
+  height: 56px;
+  border: none;
+  padding: 18px 20px;
+  box-sizing: border-box;
+  &:focus {
+    border: 2px solid transparent;
+  }
+  &:focus,
+  &:hover {
+    outline: none;
+    border: 2px solid $medium;
+  }
 }
 .disabled {
-    background: $light;
-    border-radius: 2px;
-    cursor: not-allowed;
+  background: $light;
+  border-radius: 2px;
+  cursor: not-allowed;
 }
 .valid {
-    border: 2px solid $error;
-    border-radius: 2px;
+  border: 2px solid $error;
+  border-radius: 2px;
 }
 .validText {
-    color: $error;
+  color: $error;
 }

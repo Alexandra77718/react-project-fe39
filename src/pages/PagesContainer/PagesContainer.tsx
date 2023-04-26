@@ -15,9 +15,7 @@ const PagesContainer = () => {
         [styles.darkContainer]: theme === Theme.Dark,
       })}
     >
-      <div>
         <Header />
-      </div>
       <div className={styles.mainInfo}>
         <Outlet />
         <div className={styles.footer}>

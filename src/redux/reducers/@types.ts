@@ -1,3 +1,5 @@
+import {CardListType} from "src/utils/@globalTypes";
+
 export type UserPayloadData = {
     username: string;
     email: string;
@@ -20,6 +22,15 @@ export type SignInUserData = {
     password: string;
 };
 
+export type GetAllPostsPayload = {
+    offset: number;
+    ordering?: string
+    search?: string
+  };
+  export type SetAllPostsPayload = {
+      cardList: CardListType;
+      postsCount: number;
+  };
 
 export type SignUpUserPayload = PayloadWithCallback<UserPayloadData>
 export type ActivateUserPayload = PayloadWithCallback<ActivateUserData>

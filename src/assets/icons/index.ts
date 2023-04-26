@@ -9,4 +9,6 @@ export { SunIcon } from './SunIcon';
 export { UserIcon } from './UserIcon';
 export { ClosePostIcon } from './ClosePostIcon';
 export { CloseIconModal } from "./CloseIconModal";
-export {SavedBookmarkIcon} from './SavedBookmarkIcon'
+export { SavedBookmarkIcon } from './SavedBookmarkIcon';
+export { NoContentIcon } from './NoContentIcon';
+export { SearchIcon } from './SearchIcon';

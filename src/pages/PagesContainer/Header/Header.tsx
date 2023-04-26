@@ -1,23 +1,26 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, KeyboardEvent } from "react";
 import styles from "./Header.module.scss";
 import classNames from "classnames";
-import BurgerButton from "../../../components/BurgerButton";
-import UserName from "../../../components/UserName";
-import ThemeSwitcher from "../../../components/ThemeSwitcher";
-import Button from "../../../components/Button";
+import BurgerButton from "src/components/BurgerButton";
+import UserName from "src/components/UserName";
+import ThemeSwitcher from "src/components/ThemeSwitcher";
+import Button from "src/components/Button";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { RoutesList } from "../../Router";
-import { UserIcon } from "../../../assets/icons";
-import { ButtonType } from "../../../utils/@globalTypes";
+import { RoutesList } from "src/pages/Router";
+import { UserIcon, SearchIcon } from "src/assets/icons";
+import { ButtonType } from "src/utils/@globalTypes";
 import { useDispatch, useSelector } from "react-redux";
-import { AuthSelectors, logoutUser } from "../../../redux/reducers/authSlice";
+import { AuthSelectors, logoutUser } from "src/redux/reducers/authSlice";
+import Input from "src/components/Input";
+import { getSearchedPosts } from "src/redux/reducers/postSlice";
 
 const Header = () => {
   const [isOpened, setOpened] = useState(false);
+  const [isInputOpened, setInputOpened] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const navigate = useNavigate();
   const location = useLocation();
-
   const dispatch = useDispatch();
 
   const isLoggedIn = useSelector(AuthSelectors.getLoggedIn);
@@ -51,20 +54,54 @@ const Header = () => {
     dispatch(logoutUser());
   };
 
+  const onClickSearchButton = () => {
+    setInputOpened(!isInputOpened);
+    if (isInputOpened) {
+      dispatch(getSearchedPosts(searchValue));
+      navigate(RoutesList.Search);
+    }
+  };
+
+  // поиск из строки search при нажатии на enter
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      onClickSearchButton();
+    }
+  };
+
   return (
     <>
       <div className={styles.container}>
-        <div className={styles.btnBurger}>
+        <div className={styles.infoContainer}>
           <BurgerButton isOpened={isOpened} onClick={onButtonClick} />
-        </div>
-        <div className={styles.userName} onClick={onAuthButtonClick}>
-          {isLoggedIn && userInfo ? (
-            <UserName username={userInfo?.username} />
-          ) : (
-            <UserIcon />
+          {isInputOpened && (
+            <Input
+              value={searchValue}
+              onChange={setSearchValue}
+              className={styles.input}
+              placeholder="Search..."
+              type={"text"}
+              onKeyDown={onKeyDown}
+            />
           )}
         </div>
+        <div className={styles.infoContainer}>
+          <Button
+            title={<SearchIcon />}
+            onClick={onClickSearchButton}
+            type={ButtonType.Primary}
+            className={styles.button}
+          />
+          <div className={styles.userName} onClick={onAuthButtonClick}>
+            {isLoggedIn && userInfo ? (
+              <UserName username={userInfo?.username} />
+            ) : (
+              <UserIcon />
+            )}
+          </div>
+        </div>
       </div>
+
       {isOpened && (
         <div className={styles.menuContainer}>
           <div className={styles.actionsContainer}>
