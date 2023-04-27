@@ -1,4 +1,5 @@
 @import "src/assets/colors";
+@import "src/assets/mixins.scss";
 
 .title {
   font-weight: 600;
@@ -8,6 +9,7 @@
   margin-bottom: 8px;
   padding: 18px 20px;
   box-sizing: border-box;
+  @include title();
 }
 .darkTitle {
   color: $white;

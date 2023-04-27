@@ -64,7 +64,8 @@ const Home = () => {
 
   useEffect(() => {
     const offset = PER_PAGE * (currentPage - 1);
-    dispatch(getAllPosts({ offset, ordering }));
+      dispatch(getAllPosts({ offset, ordering }));
+    //   dispatch(getAllPosts({ ordering, offset }));
   }, [currentPage, ordering]);
 
   return (

@@ -36,3 +36,4 @@ export type SignUpUserPayload = PayloadWithCallback<UserPayloadData>
 export type ActivateUserPayload = PayloadWithCallback<ActivateUserData>
 
 export type SignInUserPayload = PayloadWithCallback<SignInUserData>;
+export type AddPostPayload = PayloadWithCallback<any>;
