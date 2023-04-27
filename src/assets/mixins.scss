@@ -18,16 +18,10 @@
     color: $white;
 }
 
-@mixin title{
-    font-weight: 700;
-    font-size: 56px;
-    line-height: 84px;
+@mixin title {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
     color: $secondary;
-}
-// @mixin title {
-//     font-weight: 600;
-//     font-size: 16px;
-//     line-height: 20px;
-//     color: $secondary;
-//     margin-bottom: 8px;
-//   }
+    margin-bottom: 8px;
+  }

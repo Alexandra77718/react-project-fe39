@@ -10,6 +10,7 @@ import {
   getSinglePost,
   setMyPosts,
   setAllPosts,
+  setAllPostsLoading,
   setSinglePost,
   setSearchedPosts,
 } from "src/redux/reducers/postSlice";
@@ -47,13 +48,15 @@ function* getSinglePostWorker(action: PayloadAction<string>) {
 }
 
 function* getMyPostsWorker() {
+    yield put(setAllPostsLoading(true));
   const { ok, data, problem }: ApiResponse<AllPostsResponse> =
     yield callCheckingAuth(API.getMyPosts);
   if (ok && data) {
     yield put(setMyPosts(data.results));
   } else {
     console.warn("Error getting my posts", problem);
-  }
+    }
+    yield put(setAllPostsLoading(false));
 }
 
 function* getSearchedPostsWorker(action: PayloadAction<string>) {

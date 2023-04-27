@@ -35,9 +35,9 @@ const Router = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getUserInfo()),
-      dispatch(getMyPosts())
-    }
+        dispatch(getUserInfo());
+        dispatch(getMyPosts());
+      }
   }, [isLoggedIn]);
 
   return (
