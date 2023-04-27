@@ -50,6 +50,7 @@ const Router = () => {
           <Route path={RoutesList.Success} element={<Success />} />
           <Route path={RoutesList.SignUp} element={<SignUp />} />
           <Route path={RoutesList.Confirm} element={<Confirm />} />
+          <Route path={RoutesList.Search} element={<Search />} />
           <Route path={RoutesList.ResetPassword} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />
           <Route
