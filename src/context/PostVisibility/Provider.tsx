@@ -1,5 +1,5 @@
 import React, { FC, ReactNode } from "react";
-import { CardType } from "../../components/Card";
+import { CardType } from "../../utils/@globalTypes";
 import { PostVisibilityContext } from "./Context";
 
 type PostVisibilityProviderProps = {

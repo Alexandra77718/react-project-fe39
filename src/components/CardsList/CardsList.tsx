@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import Card from '../Card';
-import { CardSize, CardType } from '../Card/types';
 import styles from './CardsList.module.scss';
+import { CardListType, CardSize } from '../../utils/@globalTypes';
 
 type CardsListProps = {
-    cardsList: CardType[];
+    cardsList: CardListType;
 };
 const CardsList: FC<CardsListProps> = ({ cardsList }) => {
     return cardsList.length > 0 ? (
@@ -12,12 +12,16 @@ const CardsList: FC<CardsListProps> = ({ cardsList }) => {
             <div>
                 <Card card={cardsList[0]} size={CardSize.Large} />
                 <div className={styles.mediumContainer}>
-                    {cardsList.map((item, index) => {
+                {cardsList.map((item, index) => {
+            if (index > 0 && index <= 4) {
+              return <Card key={item.id} card={item} size={CardSize.Medium} />;
+            }
+          })}
+                    {/* {cardsList.map((item, index) => {
                         if (index > 0 && index < 5) {
                             return <Card key={item.id} card={item} size={CardSize.Medium} />;
                         }
-                    }
-                    )}
+                   ) } */}
                 </div>
             </div>
             <div className={styles.rightSideContainer}>

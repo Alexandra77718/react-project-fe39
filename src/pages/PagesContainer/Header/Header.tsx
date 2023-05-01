@@ -5,19 +5,18 @@ import BurgerButton from "../../../components/BurgerButton";
 import UserName from "../../../components/UserName";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import Button from "../../../components/Button";
-import { ButtonType } from "../../../components/Button/Button";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
 import { CloseIcon, OpenedMenu, UserIcon } from "../../../assets/icons";
 import { useDispatch, useSelector } from "react-redux";
-
+import {ButtonType} from "../../../utils/@globalTypes";
 
 const Header = () => {
   const [isOpened, setOpened] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   const onClickMenuButton = () => {
     setOpened(!isOpened);
