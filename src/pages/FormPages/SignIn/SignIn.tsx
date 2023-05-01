@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
+import {useDispatch} from "react-redux";
 import styles from "./SignIn.module.scss";
 import Input from "../../../components/Input";
 import classNames from "classnames";
@@ -8,10 +9,12 @@ import { Theme, useThemeContext } from "../../../context/Theme/Context";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
 import FormPages from "../FormPages";
+import {signInUser} from "../../../redux/reducers/authSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
-  const { theme } = useThemeContext();
+    const { theme } = useThemeContext();
+    const dispatch = useDispatch();
   const isDark = theme === Theme.Dark;
 
   const [email, setEmail] = useState("");
@@ -32,6 +35,16 @@ const SignIn = () => {
     navigate(RoutesList.ResetPassword);
   };
 
+  const onSignInClick = () => {
+    dispatch(
+        signInUser({
+          data: { email, password },
+          callback: () => navigate(RoutesList.Home),
+        })
+    );
+  };
+
+    
   useEffect(() => {
     if (email.length === 0) {
       setEmailError("Email is required field");
@@ -87,7 +100,7 @@ const SignIn = () => {
           <Button
             title={"Sign In"}
             disabled={!isValid}
-            onClick={() => {}}
+            onClick={onSignInClick}
             type={ButtonType.Primary}
           />
         </div>

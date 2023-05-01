@@ -18,7 +18,6 @@ import {
   setStatus,
 } from "../../redux/reducers/postSlice";
 import { RoutesList } from "../Router";
-import Card from "../../components/Card/Card";
 
 const PostPage = () => {
   const dispatch = useDispatch();
@@ -92,8 +91,7 @@ const PostPage = () => {
 
       <div className={styles.iconsContainer}>
         <div className={styles.iconsLike}>
-          <div
-            className={styles.iconLike}
+          <div className={styles.iconLike}
             onClick={onStatusClick(LikeStatus.Like)}
           >
             <LikeIcon />
