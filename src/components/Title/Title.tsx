@@ -8,9 +8,7 @@ type TitleProps = {
 };
 
 const Title: FC<TitleProps> = ({ title }) => {
-    return(
-        <span className={styles.title}>{title}</span>
-    )
+    return <span className={styles.title}>{title}</span>;
 };
 
 export default Title;
