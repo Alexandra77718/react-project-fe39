@@ -3,12 +3,12 @@ import { takeLatest, all, call, put} from "redux-saga/effects";
 import {PayloadAction} from "@reduxjs/toolkit";
 
 import API from "../api";
-import {activateUser,  logoutUser, setLoggedIn, setUserInfo,
-    signInUser, signUpUser, userInfo,} from "../reducers/authSlice";
+import {activateUser,   getUserInfo, logoutUser, setLoggedIn, setUserInfo,
+    signInUser, signUpUser } from "../reducers/authSlice";
 import {ActivateUserPayload,   SignInUserPayload, SignUpUserPayload} from "../reducers/@types";
 import {  SignInResponse, SignUpUserResponse, UserInfoResponse,} from "./@types";
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from "../../utils/constants";
-
+import callCheckingAuth from "./callCheckingAuth";
 
 
 function* signUpUserWorker(action: PayloadAction<SignUpUserPayload>) {
@@ -51,22 +51,22 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
       console.warn("Error activate user", problem);
     }
   }
-  function* getUserInfo() {
-    const accessToken = localStorage.getItem(ACCESS_TOKEN_KEY);
-    if (accessToken) {
-      const {ok, problem, data}: ApiResponse<UserInfoResponse> = yield call( API.getUserInfo,accessToken);
-      if (ok && data) {
-        yield put(setUserInfo(data))
-      } else {
-        console.warn("Error getting user info ", problem);
-      }
-    }
+ 
+function* getUserInfoWorker() {
+  const { ok, problem, data }: ApiResponse<UserInfoResponse> =
+      yield callCheckingAuth(API.getUserInfo);
+  if (ok && data) {
+    yield put(setUserInfo(data));
+  } else {
+    console.warn("Error getting user info ", problem);
   }
+}
   
   function* logoutUserWorker() {
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     localStorage.removeItem(REFRESH_TOKEN_KEY);
-    yield put(setLoggedIn(false));
+      yield put(setLoggedIn(false));
+      yield put(setUserInfo(null));
   }
   
   export default function* authSaga() {
@@ -75,6 +75,6 @@ function* signInUserWorker(action: PayloadAction<SignInUserPayload>) {
       takeLatest(activateUser, activateUserWorker),
       takeLatest(signInUser, signInUserWorker),
       takeLatest(logoutUser, logoutUserWorker),
-      takeLatest(userInfo, getUserInfo),
+      takeLatest(getUserInfo, getUserInfoWorker),
     ]);
   }

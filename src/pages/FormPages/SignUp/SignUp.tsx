@@ -9,7 +9,7 @@ import { RoutesList } from "../../Router";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { signUpUser } from "../../../redux/reducers/authSlice";
-import FormPages from "../FormPages";
+import FormPages from "src/pages/FormPages/FormPages";
 
 const SignUp = () => {
   const { theme } = useThemeContext();
@@ -128,7 +128,7 @@ const SignUp = () => {
           <Button
             title={"Sign Up"}
             disabled={!isValid}
-            onClick={() => {}}
+            onClick={onSignUpClick}
             type={ButtonType.Primary}
           />
         </div>

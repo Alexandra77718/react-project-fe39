@@ -9,7 +9,7 @@ import { Theme, useThemeContext } from "../../../context/Theme/Context";
 import { NavLink, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
 import FormPages from "../FormPages";
-import {signInUser} from "../../../redux/reducers/authSlice";
+import {signInUser} from "src/redux/reducers/authSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
