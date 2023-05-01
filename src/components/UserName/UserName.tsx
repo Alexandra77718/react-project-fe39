@@ -17,7 +17,7 @@ const UserName: FC<UserNameProps> = ({ username }) => {
             </div>
             <div className={styles.userName}>{username}</div>
         </div>
-    )
+    );
 };
 
 export default UserName;

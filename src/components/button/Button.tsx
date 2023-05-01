@@ -7,7 +7,7 @@ export enum ButtonType{
     Primary = "Primary",
     Secondary = "Secondary",
     Error = "Error",
-}
+};
 
 type ButtonProps = {
     title: string | ReactNode;
@@ -15,20 +15,20 @@ type ButtonProps = {
     type: ButtonType;
     disabled?: boolean;
     className?: string | undefined;
-}
+};
 const btnStyles = {
     [ButtonType.Primary]: styles.primaryButton,
     [ButtonType.Secondary]: styles.secondaryButton,
     [ButtonType.Error]: styles.errorButton,
 };
 
-const Button: FC<ButtonProps> = ({ title, onClick, type, disabled,className }) => {
+const Button: FC<ButtonProps> = ({ title, onClick, type, disabled, className }) => {
     const buttonClassName = btnStyles[type];
 
-    return ( <div onClick ={disabled ? undefined : onClick}
+    return (<div onClick={disabled ? undefined : onClick}
         className={classNames(buttonClassName, className, { [styles.disabledButton]: disabled })}
-        >{title}</div>
-    )
-}
+    >{title}</div>
+    );
+};
 
 export default Button;
