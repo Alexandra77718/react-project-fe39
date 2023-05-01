@@ -1,4 +1,4 @@
-@import "./src/assets/colors";
+@import "src/assets/colors";
 
 .backToHome {
   font-weight: 400;
@@ -18,17 +18,12 @@
   align-items: center;
   justify-content: center;
 }
-.emailText {
+.inputContainer {
   border: 1px solid $medium;
   padding: 40px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 24px;
-  color: $secondary;
 }
-.emailTextDark{
+.inputContainerDark{
   border-color: $gray;
-  color: $white;
 }
 .title {
   text-align: start;
@@ -49,7 +44,7 @@
   margin-top: 48px;
   width: 544px;
 }
-.signUp {
+.singUp {
   font-weight: 500;
   font-size: 16px;
   line-height: 20px;
@@ -57,13 +52,19 @@
   display: flex;
   justify-content: center;
   margin-top: 24px;
-  & span {
-    color: $primary;
+}
+.darkSingUp{
+  color:$medium;
+  .navButton {
+    color: $primary-secondary;
   }
 }
-.darkSignUp{
-  color:$medium;
-  & span {
-    color: $primary-secondary;
+
+.navButton {
+  text-decoration: none;
+  color: $primary;
+  margin-left: 20px;
+  &:hover {
+    text-decoration: underline;
   }
 }

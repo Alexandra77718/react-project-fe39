@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./SignIn.module.scss";
+import styles from "./SignUp.module.scss";
 import Title from "../../components/Title";
 import Input from "../../components/Input";
 import classNames from "classnames";
@@ -9,17 +9,23 @@ import { Theme, useThemeContext } from "../../context/Theme/Context";
 import { NavLink } from "react-router-dom";
 import { RoutesList } from "../Router";
 
-
-const SignIn = () => {
+const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const onChangeEmail = (value: string) => {
     setEmail(value);
   };
-
   const onChangePassword = (value: string) => {
     setPassword(value);
+  };
+  const onChangeName = (value: string) => {
+    setName(value);
+  };
+  const onChangeConfirmPassword = (value: string) => {
+    setConfirmPassword(value);
   };
 
   const { theme } = useThemeContext();
@@ -27,16 +33,15 @@ const SignIn = () => {
 
   return (
     <div>
-      <NavLink
-        to={RoutesList.Home}
-        className={classNames(styles.backToHome, {
-          [styles.backToHomeDark]: isDark,
-        })}
+      <NavLink to={RoutesList.Home}
+               className={classNames(styles.backToHome, {
+                 [styles.backToHomeDark]: isDark,
+               })}
       >
         Back to home
       </NavLink>
       <div className={classNames(styles.title)}>
-        <Title title={"Sign In"} />
+        <Title title={"Sign Up"} />
       </div>
       <div className={styles.wrapper}>
         <div
@@ -44,6 +49,14 @@ const SignIn = () => {
             [styles.inputContainerDark]: isDark,
           })}
         >
+          <Input
+            value={name}
+            onChange={onChangeName}
+            type={"text"}
+            title="Name"
+            placeholder="Your name"
+          />
+
           <Input
             value={email}
             onChange={onChangeEmail}
@@ -58,16 +71,17 @@ const SignIn = () => {
             title="Password"
             placeholder="Your password"
           />
-          <div
-            className={classNames(styles.forgotPassword, {
-              [styles.darkThemeForgotPassword]: isDark,
-            })}
-          >
-            Forgot password?
-          </div>
+          <Input
+            value={confirmPassword}
+            onChange={onChangeConfirmPassword}
+            type={"password"}
+            title="Confirm password"
+            placeholder="Confirm password"
+          />
+
           <div className={styles.button}>
             <Button
-              title={"Sign In"}
+              title={"Sign Up"}
               onClick={() => {}}
               type={ButtonType.Primary}
             />
@@ -77,9 +91,10 @@ const SignIn = () => {
               [styles.darkSingUp]: isDark,
             })}
           >
-            Don’t have an account?
-            <NavLink to={RoutesList.SignUp} className={styles.navButton}>
-              Sign Up
+            Already have an account?
+                      <NavLink to={RoutesList.SignIn}
+                          className={styles.navButton}>
+              Sign In
             </NavLink>
           </div>
         </div>
@@ -88,4 +103,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

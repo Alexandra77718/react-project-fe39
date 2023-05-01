@@ -1,13 +1,9 @@
 import React, { useState} from "react";
-import { Provider } from "react-redux";
-
-import styles from './App.module.scss';
-import Home from './pages/Home';
 import ThemeProvider from './context/Theme/Provider';
 import {Theme} from "./context/Theme/Context";
-import { Router } from "react-router-dom";
-import store from "./redux/store";
-
+import Router  from './pages/Router';
+import classNames from "classnames";
+import styles from './App.module.scss';
 
 
 const App = () => {
@@ -20,7 +16,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme} onChangeTheme={onChangeTheme}>
             <div className={styles.container}>
-           <Home />
+           <Router />
             </div>
         </ThemeProvider>
     );
