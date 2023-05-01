@@ -1,7 +1,6 @@
 @import "src/assets/colors";
 
-
-.container{
+.container {
   flex: 1;
   height: 100%;
   display: flex;
@@ -9,7 +8,7 @@
   overflow: scroll;
   background-color: $extra-light;
 }
-.mainInfo{
+.mainInfo {
   flex: 1;
   padding-left: 400px;
   padding-right: 200px;
@@ -18,7 +17,7 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.darkContainer{
+.darkContainer {
   background-color: $secondary;
 }
 

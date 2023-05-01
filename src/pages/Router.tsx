@@ -12,7 +12,7 @@ import NewPassword from "./FormPages/NewPassword";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
 import {getMyPosts} from "../../src/redux/reducers/postSlice";
-
+import Search from "src/pages/Search";
 
 export enum RoutesList {
   Home = "/",

@@ -1,12 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import { RootState } from "../store";
-import {
-  ActivateUserPayload,
-  SignInUserPayload,
-  SignUpUserPayload,
-} from "./@types";
-import { ACCESS_TOKEN_KEY } from "../../utils/constants";
+import { ActivateUserPayload, SignInUserPayload,
+  SignUpUserPayload} from "./@types";
+import { ACCESS_TOKEN_KEY } from "src/utils/constants";
 import { UserInfoResponse } from "../sagas/@types";
 
 type InitialType = {
