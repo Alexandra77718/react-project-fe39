@@ -2,7 +2,7 @@
 
 .container {
     width: 1120px;
-    height: 216px;
+   min-height: 216px;
     display: flex;
     flex-direction: column;
 }
@@ -90,3 +90,9 @@
     font-size: 18px;
     color: $secondary;
 }
+.darkTitle{
+    color: $white;
+  }
+  .darkText{
+    color: $white;
+  }

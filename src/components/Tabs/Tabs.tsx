@@ -1,21 +1,23 @@
 import React, {FC, useState} from "react";
-
 import styles from './Tabs.module.scss';
 import classNames from 'classnames';
-import { TabsProps } from "./type";
-
+import { TabsNames, TabsProps } from "./type";
+import { Theme, useThemeContext } from '../../context/Theme/Context';
 
 const Tabs: FC<TabsProps> = ({ tabsList, activeTab, onClick }) => {
-    
+    const onTabClick = (key: TabsNames) => () => onClick(key);
+    const {theme} =useThemeContext()
     return (
-        <div className={styles.container}>
+        <div className={classNames(styles.container, {
+            [styles.darkContainer]: theme === Theme.Dark
+        })}>
             {tabsList.map((tab) => {
                 return (
                     <div key={tab.key} className={classNames(styles.tab, {
                         [styles.activeTab]: activeTab === tab.key,
                         [styles.disabled]: tab.disabled,
                     })}
-                        onClick={tab.disabled ? undefined : onClick(tab.key)}
+                        onClick={tab.disabled ? undefined : onTabClick(tab.key)}
                     >
                         {tab.title}
                     </div>

@@ -12,6 +12,6 @@ export enum TabsNames {
   
   export type TabsProps = {
     tabsList: TabsType[];
-    onClick: (key: TabsNames) => () => void;
+    onClick: (key: TabsNames) => void;
     activeTab: number;
   };
