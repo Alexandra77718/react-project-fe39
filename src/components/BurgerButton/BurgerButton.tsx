@@ -1,4 +1,4 @@
-import React, {useState, FC } from 'react';
+import React, { FC } from 'react';
 import styles from './BurgerButton.module.scss';
 import { CloseIcon, OpenedMenu } from "../../assets/icons";
 import Button from '../Button';
