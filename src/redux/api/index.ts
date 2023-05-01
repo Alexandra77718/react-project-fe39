@@ -1,5 +1,9 @@
 import { create } from "apisauce";
-import {ActivateUserData, SignInUserData, UserPayloadData} from "src/redux/reducers/@types";
+import {
+  ActivateUserData,
+  SignInUserData,
+  UserPayloadData,
+} from "src/redux/reducers/@types";
 import { PER_PAGE } from "src/utils/constants";
 
 const API = create({
@@ -54,6 +58,15 @@ const getMyPosts = (token: string) => {
   );
 };
 
+const addPost = (token: string, data: any) => {
+  return API.post("/blog/posts/", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
 export default {
   getPosts,
   getSinglePost,
@@ -64,4 +77,5 @@ export default {
   verifyToken,
   refreshToken,
   getMyPosts,
+  addPost,
 };

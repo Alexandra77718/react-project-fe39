@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
 import {getMyPosts} from "../../src/redux/reducers/postSlice";
 import Search from "src/pages/Search";
+import AddPost from "src/pages/AddPost";
 
 export enum RoutesList {
   Home = "/",
@@ -34,9 +35,9 @@ const Router = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      dispatch(getUserInfo()),
-      dispatch(getMyPosts())
-    }
+        dispatch(getUserInfo());
+        dispatch(getMyPosts());
+      }
   }, [isLoggedIn]);
 
   return (
@@ -49,12 +50,13 @@ const Router = () => {
           <Route path={RoutesList.Success} element={<Success />} />
           <Route path={RoutesList.SignUp} element={<SignUp />} />
           <Route path={RoutesList.Confirm} element={<Confirm />} />
+          <Route path={RoutesList.Search} element={<Search />} />
           <Route path={RoutesList.ResetPassword} element={<ResetPassword />} />
           <Route path={RoutesList.NewPassword} element={<NewPassword />} />
           <Route
             path={RoutesList.AddPost}
             element={
-              isLoggedIn ? <Home /> : <Navigate to={RoutesList.SignIn} />
+              isLoggedIn ? <AddPost /> : <Navigate to={RoutesList.SignIn} />
             }
           />
           <Route path={RoutesList.Default} element={<div>404 NOT FOUND</div>} />
