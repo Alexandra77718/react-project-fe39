@@ -12,3 +12,4 @@ export { CloseIconModal } from "./CloseIconModal";
 export { SavedBookmarkIcon } from './SavedBookmarkIcon';
 export { NoContentIcon } from './NoContentIcon';
 export { SearchIcon } from './SearchIcon';
+export { ArrowIcon } from "./ArrowIcon";

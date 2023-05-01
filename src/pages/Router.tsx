@@ -11,7 +11,7 @@ import ResetPassword from "./FormPages/ResetPassword";
 import NewPassword from "./FormPages/NewPassword";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthSelectors, getUserInfo } from "../redux/reducers/authSlice";
-import {getMyPosts} from "../../src/redux/reducers/postSlice";
+import { getMyPosts } from "../../src/redux/reducers/postSlice";
 import Search from "src/pages/Search";
 import AddPost from "src/pages/AddPost";
 
@@ -35,9 +35,9 @@ const Router = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-        dispatch(getUserInfo());
-        dispatch(getMyPosts());
-      }
+      dispatch(getUserInfo());
+      dispatch(getMyPosts());
+    }
   }, [isLoggedIn]);
 
   return (

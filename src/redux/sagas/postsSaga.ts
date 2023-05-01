@@ -1,5 +1,5 @@
 import { ApiResponse } from "apisauce";
-import { takeLatest, all, call, put } from "redux-saga/effects";
+import { takeLatest, all, call, put, takeLeading } from "redux-saga/effects";
 
 import API from "../api";
 import {
@@ -18,15 +18,12 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { AllPostsResponse } from "./@types";
 import { CardType } from "src/utils/@globalTypes";
 import callCheckingAuth from "src/redux/sagas/callCheckingAuth";
-import { AddPostPayload, GetAllPostsPayload } from "src/redux/reducers/@types";
+import { AddPostPayload, GetAllPostsPayload,  GetSearchPostsPayload, } from "src/redux/reducers/@types";
 
 function* getAllPostsWorker(action: PayloadAction<GetAllPostsPayload>) {
   const { offset, ordering } = action.payload;
   const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
-    API.getPosts,
-    offset,
-    "",
-    ordering
+    API.getPosts, offset, "", ordering
   );
   if (ok && data) {
     yield put(setAllPosts({ cardList: data.results, postsCount: data.count }));
@@ -59,14 +56,21 @@ function* getMyPostsWorker() {
     yield put(setAllPostsLoading(false));
 }
 
-function* getSearchedPostsWorker(action: PayloadAction<string>) {
-  const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
+function* getSearchedPostsWorker(action: PayloadAction<GetSearchPostsPayload>) {
+    const { searchValue, isOverwrite, offset } = action.payload;
+    const { ok, data, problem }: ApiResponse<AllPostsResponse> = yield call(
     API.getPosts,
-    0,
-    action.payload
+    offset,
+    searchValue
   );
   if (ok && data) {
-    yield put(setSearchedPosts(data.results));
+    yield put(
+        setSearchedPosts({
+          cardList: data.results,
+          postsCount: data.count,
+          isOverwrite,
+        })
+      );
   } else {
     console.warn("Error getting all posts", problem);
   }
@@ -90,7 +94,7 @@ export default function* postsSaga() {
     takeLatest(getAllPosts, getAllPostsWorker),
     takeLatest(getSinglePost, getSinglePostWorker),
     takeLatest(getMyPosts, getMyPostsWorker),
-    takeLatest(getSearchedPosts, getSearchedPostsWorker),
+    takeLeading(getSearchedPosts, getSearchedPostsWorker),
     takeLatest(addNewPost, addNewPostWorker),
   ]);
 }

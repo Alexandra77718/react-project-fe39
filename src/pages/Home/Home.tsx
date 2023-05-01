@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ReactPaginate from "react-paginate";
 import styles from "./Home.module.scss";
@@ -12,7 +12,7 @@ import { getAllPosts, PostSelectors } from "src/redux/reducers/postSlice";
 import { ButtonType, TabsNames } from "src/utils/@globalTypes";
 import { PER_PAGE } from "src/utils/constants";
 import Loader from "src/components/Loader";
-
+import { AuthSelectors } from "src/redux/reducers/authSlice";
 
 enum Order {
     Date = "date",
@@ -68,8 +68,7 @@ const Home = () => {
 
   useEffect(() => {
     const offset = PER_PAGE * (currentPage - 1);
-    dispatch(getAllPosts({ offset, ordering }));
-    //   dispatch(getAllPosts({ ordering, offset }));
+      dispatch(getAllPosts({ ordering, offset }));
   }, [currentPage, ordering]);
 
   return (

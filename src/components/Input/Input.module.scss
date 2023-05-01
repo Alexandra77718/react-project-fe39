@@ -14,21 +14,33 @@
 .darkTitle {
   color: $white;
 }
+// .input {
+//   width: 544px;
+//   height: 56px;
+//   border: none;
+//   padding: 18px 20px;
+//   box-sizing: border-box;
+//   &:focus {
+//     border: 2px solid transparent;
+//   }
+//   &:focus,
+//   &:hover {
+//     outline: none;
+//     border: 2px solid $medium;
+//   }
+// }
+
 .input {
-  width: 544px;
-  height: 56px;
-  border: none;
-  padding: 18px 20px;
-  box-sizing: border-box;
-  &:focus {
+    width: 544px;
+    height: 56px;
+    box-sizing: border-box;
     border: 2px solid transparent;
+    &:focus, &:hover {
+      outline: none;
+      border: 2px solid $medium;
+    }
   }
-  &:focus,
-  &:hover {
-    outline: none;
-    border: 2px solid $medium;
-  }
-}
+
 .disabled {
   background: $light;
   border-radius: 2px;
