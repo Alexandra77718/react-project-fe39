@@ -1,15 +1,30 @@
 import React, { useMemo, useState } from "react";
 import styles from "./Header.module.scss";
-import BurgerButton from '../../../components/BurgerButton';
-import UserName from '../../../components/UserName';
+import classNames from "classnames";
+import BurgerButton from "../../../components/BurgerButton";
+import UserName from "../../../components/UserName";
 import ThemeSwitcher from "../../../components/ThemeSwitcher";
 import Button from "../../../components/Button";
 import { ButtonType } from "../../../components/Button/Button";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { RoutesList } from "../../Router";
-import classNames from "classnames";
+import { CloseIcon, OpenedMenu, UserIcon } from "../../../assets/icons";
+import { useDispatch, useSelector } from "react-redux";
+
 
 const Header = () => {
+  const [isOpened, setOpened] = useState(false);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const isLoggedIn = false;
+
+  const onClickMenuButton = () => {
+    setOpened(!isOpened);
+  };
+  const onAuthButtonClick = () => {
+    navigate(RoutesList.SignIn);
+  };
   const navButtonsList = useMemo(
     () => [
       {
@@ -20,54 +35,60 @@ const Header = () => {
         title: "Add Post",
         key: RoutesList.AddPost,
       },
+      ...(!isLoggedIn
+        ? [
+            {
+              title: "Add Post",
+              key: RoutesList.AddPost,
+            },
+          ]:[]),
     ],
-    []
+    [isLoggedIn]
   );
-  const [isOpened, setOpened] = useState(false);
-  const onClick = () => {
-    return setOpened(!isOpened);
-  };
-  const navigate = useNavigate();
-  const location = useLocation();
 
-  const onAuthButtonClick = () => {
-    navigate(RoutesList.SignIn);
-  };
   return (
     <>
       <div className={styles.container}>
-        <BurgerButton isOpened={isOpened} onClick={onClick} />
-        <div className={styles.userName}>
+        <Button
+          title={isOpened ? <CloseIcon /> : <OpenedMenu />}
+          onClick={onClickMenuButton}
+          type={ButtonType.Primary}
+          className={styles.button}
+        />
+        {isLoggedIn ? (
           <UserName username={"Artem Malkin"} />
-        </div>
+        ) : (
+          <Button
+            title={<UserIcon />}
+            onClick={onAuthButtonClick}
+            type={ButtonType.Primary}
+            className={styles.button}
+          />
+        )}
       </div>
       {isOpened && (
         <div className={styles.menuContainer}>
           <div className={styles.actionsContainer}>
-            <div className={styles.userNameMenu}>
-              <UserName username={"Artem Malkin"} />
-            </div>
-            <div>
-              {navButtonsList.map(({ key, title }) => {
-                return (
-                  <NavLink
-                    to={key}
-                    key={key}
-                    className={classNames(styles.navButton, {
-                      [styles.activeNavButton]: location.pathname === key,
-                    })}
-                  >
-                    {title}
-                  </NavLink>
-                );
-              })}
-            </div>
+            {isLoggedIn && <UserName username={"Artem Malkin"} />}
+            {navButtonsList.map(({ key, title }) => {
+              return (
+                <NavLink
+                  to={key}
+                  key={key}
+                  className={classNames(styles.navButton, {
+                    [styles.activeNavButton]: location.pathname === key,
+                  })}
+                >
+                  {title}
+                </NavLink>
+              );
+            })}
           </div>
           <div>
             <ThemeSwitcher />
             <Button
-              title={"Sign In"}
-              onClick={onAuthButtonClick}
+              title={isLoggedIn ? "Log out" : "Sign In"}
+              onClick={isLoggedIn ? () => {} : onAuthButtonClick}
               type={ButtonType.Secondary}
               className={styles.authButton}
             />
@@ -77,5 +98,4 @@ const Header = () => {
     </>
   );
 };
-
 export default Header;

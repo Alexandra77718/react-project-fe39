@@ -33,10 +33,11 @@ const SignUp = () => {
 
   return (
     <div>
-      <NavLink to={RoutesList.Home}
-               className={classNames(styles.backToHome, {
-                 [styles.backToHomeDark]: isDark,
-               })}
+      <NavLink
+        to={RoutesList.Home}
+        className={classNames(styles.backToHome, {
+          [styles.backToHomeDark]: isDark,
+        })}
       >
         Back to home
       </NavLink>
@@ -92,8 +93,7 @@ const SignUp = () => {
             })}
           >
             Already have an account?
-                      <NavLink to={RoutesList.SignIn}
-                          className={styles.navButton}>
+            <NavLink to={RoutesList.SignIn} className={styles.navButton}>
               Sign In
             </NavLink>
           </div>
